@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b6lk0ksejh07b"]
+
+[ext_resource type="Script" uid="uid://dq3nh62aacbcm" path="res://player_controller.gd" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://b2uk1b4x3w035" path="res://normal_red.png" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://8672hgr0rds5" path="res://movement_component.gd" id="3_1bvp3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ka23v"]
+radius = 29.0
+height = 94.0
+
+[node name="Main" type="Node2D" unique_id=1514945978]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=613642801]
+
+[node name="PlayerController" type="CharacterBody2D" parent="." unique_id=1627634242]
+position = Vector2(118, 307)
+script = ExtResource("1_h2yge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController" unique_id=990967672]
+position = Vector2(11, 1)
+shape = SubResource("CapsuleShape2D_ka23v")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerController" unique_id=2076845194]
+texture = ExtResource("1_ig7tw")
+
+[node name="MovementComponent" type="Node" parent="PlayerController" unique_id=369805455]
+script = ExtResource("3_1bvp3")

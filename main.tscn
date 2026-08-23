@@ -1,12 +1,21 @@
 [gd_scene format=3 uid="uid://b6lk0ksejh07b"]
 
-[ext_resource type="Script" uid="uid://dq3nh62aacbcm" path="res://player_controller.gd" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://dq3nh62aacbcm" path="res://scripts/player_controller.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://b2uk1b4x3w035" path="res://normal_red.png" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://8672hgr0rds5" path="res://movement_component.gd" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://8672hgr0rds5" path="res://scripts/movement_component_2d.gd" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://8o72gwuhgrmn" path="res://scripts/stats_component.gd" id="4_1bvp3"]
+[ext_resource type="Resource" uid="uid://cfmweap4dmojm" path="res://resources/player_stats.tres" id="5_lquwl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ka23v"]
 radius = 29.0
 height = 94.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qudme"]
+radius = 23.0
+height = 78.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ka23v"]
+size = Vector2(60.52298, 19.31305)
 
 [node name="Main" type="Node2D" unique_id=1514945978]
 
@@ -17,11 +26,36 @@ position = Vector2(118, 307)
 script = ExtResource("1_h2yge")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController" unique_id=990967672]
-position = Vector2(11, 1)
 shape = SubResource("CapsuleShape2D_ka23v")
 
-[node name="Sprite2D" type="Sprite2D" parent="PlayerController" unique_id=2076845194]
-texture = ExtResource("1_ig7tw")
+[node name="HurtboxComponent" type="Area2D" parent="PlayerController" unique_id=468042724]
+unique_name_in_owner = true
 
-[node name="MovementComponent" type="Node" parent="PlayerController" unique_id=369805455]
+[node name="HurtboxShape2D" type="CollisionShape2D" parent="PlayerController/HurtboxComponent" unique_id=825991774]
+shape = SubResource("CapsuleShape2D_qudme")
+
+[node name="FlipPivot" type="Node2D" parent="PlayerController" unique_id=1445756649]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerController/FlipPivot" unique_id=2076845194]
+unique_name_in_owner = true
+texture = ExtResource("1_ig7tw")
+offset = Vector2(-14.715, 0)
+
+[node name="AttackComponent" type="Area2D" parent="PlayerController/FlipPivot" unique_id=207489265]
+
+[node name="HitboxShape2D" type="CollisionShape2D" parent="PlayerController/FlipPivot/AttackComponent" unique_id=1374204465]
+position = Vector2(-31.947655, 8.363647)
+rotation = 0.36651915
+scale = Vector2(0.9999997, 0.9999997)
+shape = SubResource("RectangleShape2D_ka23v")
+
+[node name="MovementComponent2D" type="Node" parent="PlayerController" unique_id=369805455 node_paths=PackedStringArray("statsComponent")]
+unique_name_in_owner = true
 script = ExtResource("3_1bvp3")
+statsComponent = NodePath("../StatsComponent")
+
+[node name="StatsComponent" type="Node" parent="PlayerController" unique_id=752223578]
+unique_name_in_owner = true
+script = ExtResource("4_1bvp3")
+statsData = ExtResource("5_lquwl")

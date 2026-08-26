@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cm3wc0jf2ol2w"]
+
+[ext_resource type="Script" uid="uid://8o72gwuhgrmn" path="res://scripts/stats_component.gd" id="1_wy2xb"]
+[ext_resource type="Resource" uid="uid://cfmweap4dmojm" path="res://resources/player_stats.tres" id="2_obowk"]
+
+[node name="StatsComponent" type="Node" unique_id=1824712528]
+script = ExtResource("1_wy2xb")
+statsData = ExtResource("2_obowk")

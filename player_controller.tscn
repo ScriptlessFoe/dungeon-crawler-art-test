@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://bcr20ha6slypg"]
+
+[ext_resource type="Script" uid="uid://dq3nh62aacbcm" path="res://scripts/player_controller.gd" id="1_4garc"]
+[ext_resource type="PackedScene" uid="uid://caie2r4xxkx73" path="res://components/hurtbox_component.tscn" id="2_lyd3o"]
+[ext_resource type="Texture2D" uid="uid://dcoswhqita4g" path="res://resources/placeholder_atlas.tres" id="3_oamho"]
+[ext_resource type="PackedScene" uid="uid://byav0ij4p71od" path="res://components/attack_component.tscn" id="4_3eoxc"]
+[ext_resource type="PackedScene" uid="uid://cumpm7m5x4vxn" path="res://components/movement_component_2d.tscn" id="5_mpocd"]
+[ext_resource type="PackedScene" uid="uid://cm3wc0jf2ol2w" path="res://components/stats_component.tscn" id="6_vw112"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akhme"]
+size = Vector2(10, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(17.241379, 18.965515)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbuqw"]
+atlas = ExtResource("3_oamho")
+region = Rect2(224, 32, 16, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kek77"]
+radius = 17.241379
+height = 34.482758
+
+[sub_resource type="Animation" id="Animation_4garc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/AttackComponent/HitboxShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lyd3o"]
+resource_name = "attack"
+length = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/AttackComponent/HitboxShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666669),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oamho"]
+_data = {
+&"RESET": SubResource("Animation_4garc"),
+&"attack": SubResource("Animation_lyd3o")
+}
+
+[node name="PlayerController" type="CharacterBody2D" unique_id=1801437877]
+script = ExtResource("1_4garc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1412368569]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_akhme")
+
+[node name="HurtboxComponent" parent="." unique_id=1819200368 node_paths=PackedStringArray("statsComponent", "hurtbox") instance=ExtResource("2_lyd3o")]
+statsComponent = NodePath("../StatsComponent")
+hurtbox = NodePath("HurtboxShape2D")
+
+[node name="HurtboxShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=731263388]
+position = Vector2(-1.4901161e-07, 0.49999985)
+scale = Vector2(0.58000004, 0.58000004)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="FlipPivot" type="Node2D" parent="." unique_id=1528323970]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="FlipPivot" unique_id=505725528]
+unique_name_in_owner = true
+texture_filter = 1
+texture = SubResource("AtlasTexture_bbuqw")
+
+[node name="AttackComponent" parent="FlipPivot" unique_id=2044745980 node_paths=PackedStringArray("statsComponent", "hitbox") instance=ExtResource("4_3eoxc")]
+statsComponent = NodePath("../../StatsComponent")
+hitbox = NodePath("HitboxShape2D")
+
+[node name="HitboxShape2D" type="CollisionShape2D" parent="FlipPivot/AttackComponent" unique_id=320400001]
+unique_name_in_owner = true
+position = Vector2(13, 1.1920929e-07)
+scale = Vector2(0.58, 0.58)
+shape = SubResource("CapsuleShape2D_kek77")
+disabled = true
+
+[node name="MovementComponent2D" parent="." unique_id=810548602 node_paths=PackedStringArray("statsComponent") instance=ExtResource("5_mpocd")]
+unique_name_in_owner = true
+statsComponent = NodePath("../StatsComponent")
+
+[node name="StatsComponent" parent="." unique_id=1824712528 instance=ExtResource("6_vw112")]
+unique_name_in_owner = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=502590655]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_oamho")

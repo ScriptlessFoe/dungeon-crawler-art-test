@@ -1,21 +1,36 @@
 extends CharacterBody2D
-class_name Player
+class_name Enemy
 
 @onready var movementComponent:MovementComponent2D = %MovementComponent2D
 @onready var pivot:Node2D = %FlipPivot
 @onready var animationPlayer:AnimationPlayer = %AnimationPlayer
 @onready var statsComponent:StatsComponent = %StatsComponent
 
-var is_attacking:bool = false
+@export var attackDelay:float = 3.0
+var attackDeltaAccumulator:float = 0.0
+
+var isAttacking:bool = false
+
 
 func _ready() -> void:
-		# set up signals
+	# set up signals
 	statsComponent.healthChanged.connect(_on_health_changed)
 	statsComponent.healthDepleted.connect(_on_health_depleted)
 
 func _physics_process(delta: float) -> void:
-	# use inputs to get direction
-	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	# handle movement
+	move(delta)
+	
+	# handle attacks
+	
+	if attackDeltaAccumulator > attackDelay:
+		attack()
+		attackDeltaAccumulator = 0.0
+	else:
+		attackDeltaAccumulator += delta
+
+func move(delta: float) -> void:
+	var direction:Vector2 = Vector2(0,0) # no movement yet
 	
 	# handle velocity control
 	movementComponent.handle_movement(self, direction, delta)
@@ -26,20 +41,18 @@ func _physics_process(delta: float) -> void:
 	elif (direction.x < 0):
 		pivot.scale.x = -1.0
 	
-	# actually execute the movement and process collisions
+	# Actually execute the movement and process collisions
 	move_and_slide()
 
-func _unhandled_input(event: InputEvent) -> void:
-	# handle attacks with animation player
-	if event.is_action_pressed("attack") and not is_attacking:
-		is_attacking = true
-		animationPlayer.play("attack") # play attack animation to deal with hitbox - should move this to a "weapon" class in the future
-		
-		await animationPlayer.animation_finished
-		is_attacking = false
+func attack() -> void:
+	isAttacking = true
+	animationPlayer.play("attack")
+	print("attacking")
+	await animationPlayer.animation_finished
+	isAttacking = false
 
 func _on_health_changed(currentHP:int, maxHP:int) -> void:
-	print("Player health: ", currentHP, "/", maxHP)
+	print("Enemy health: ", currentHP, "/", maxHP)
 
 func _on_health_depleted() -> void:
-	print("Player died")
+	print("Enemy died")

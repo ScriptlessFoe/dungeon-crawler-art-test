@@ -9,13 +9,14 @@ class_name StatsComponent
 @onready var currentHealth:int = statsData.maxHealth if statsData else 100
 var speedMultiplier:float = 1.0
 
-signal healthChanged(current:int, max:int)
+signal healthChanged(currentHP:int, maxHP:int)
 signal healthDepleted
 
 func _ready() -> void:
 	# error check
 	if not statsData:
 		print("StatsComponent: missing CharacterStatsData")
+		return
 
 func take_damage(amount: int) -> void:
 	if statsData == null: return

@@ -12,6 +12,7 @@ func _ready() -> void:
 	# error check
 	if not statsComponent:
 		print("MovementComponent: missing StatsComponent")
+		return
 
 # basic movement
 func handle_movement(body: CharacterBody2D, direction: Vector2, delta: float) -> void:

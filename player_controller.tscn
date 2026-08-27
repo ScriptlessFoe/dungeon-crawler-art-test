@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cumpm7m5x4vxn" path="res://components/movement_component_2d.tscn" id="5_mpocd"]
 [ext_resource type="PackedScene" uid="uid://cm3wc0jf2ol2w" path="res://components/stats_component.tscn" id="6_vw112"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_akhme"]
-size = Vector2(10, 11)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_64wka"]
+radius = 5.5
+height = 13.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(17.241379, 18.965515)
@@ -63,7 +64,7 @@ script = ExtResource("1_4garc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1412368569]
 position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_akhme")
+shape = SubResource("CapsuleShape2D_64wka")
 
 [node name="HurtboxComponent" parent="." unique_id=1819200368 node_paths=PackedStringArray("statsComponent", "hurtbox") instance=ExtResource("2_lyd3o")]
 statsComponent = NodePath("../StatsComponent")

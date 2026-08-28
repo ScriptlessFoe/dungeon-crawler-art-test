@@ -6,6 +6,8 @@ class_name Player
 @onready var animationPlayer:AnimationPlayer = %AnimationPlayer
 @onready var statsComponent:StatsComponent = %StatsComponent
 
+@export var pushForce:float = 10.0
+
 var is_attacking:bool = false
 
 func _ready() -> void:
@@ -28,6 +30,15 @@ func _physics_process(delta: float) -> void:
 	
 	# actually execute the movement and process collisions
 	move_and_slide()
+	
+	# check for RigidBody2D collisions and apply force
+	for index in get_slide_collision_count():
+		var collision = get_slide_collision(index)
+		var collider = collision.get_collider()
+		
+		if collider is RigidBody2D:
+			var pushDir:Vector2 = -collision.get_normal() # get opposite of normal to push away
+			collider.apply_impulse(pushDir * pushForce * velocity.length() * delta) 
 
 func _unhandled_input(event: InputEvent) -> void:
 	# handle attacks with animation player

@@ -56,3 +56,4 @@ func _on_health_changed(currentHP:int, maxHP:int) -> void:
 
 func _on_health_depleted() -> void:
 	print("Enemy died")
+	queue_free()

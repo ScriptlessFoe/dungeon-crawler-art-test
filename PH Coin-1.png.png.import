@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2uk1b4x3w035"
-path="res://.godot/imported/normal_red.png-3081f3aab542287c22bbf1db6ed60170.ctex"
+uid="uid://c3ip18738lmdp"
+path="res://.godot/imported/PH Coin-1.png.png-a029ce2bffeb7be85909ad6ff7141208.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://normal_red.png"
-dest_files=["res://.godot/imported/normal_red.png-3081f3aab542287c22bbf1db6ed60170.ctex"]
+source_file="res://PH Coin-1.png.png"
+dest_files=["res://.godot/imported/PH Coin-1.png.png-a029ce2bffeb7be85909ad6ff7141208.ctex"]
 
 [params]
 

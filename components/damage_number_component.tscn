@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cpwi3jbodapky"]
+
+[ext_resource type="Script" uid="uid://5c1qyeb4ed8g" path="res://scripts/damage_number_component.gd" id="1_bp6f5"]
+
+[node name="DamageNumberComponent" type="Control" unique_id=1290919215]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bp6f5")

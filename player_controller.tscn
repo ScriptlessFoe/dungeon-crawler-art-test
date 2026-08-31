@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://byav0ij4p71od" path="res://components/attack_component.tscn" id="4_3eoxc"]
 [ext_resource type="PackedScene" uid="uid://cumpm7m5x4vxn" path="res://components/movement_component_2d.tscn" id="5_mpocd"]
 [ext_resource type="PackedScene" uid="uid://cm3wc0jf2ol2w" path="res://components/stats_component.tscn" id="6_vw112"]
+[ext_resource type="PackedScene" uid="uid://cpwi3jbodapky" path="res://components/damage_number_component.tscn" id="7_lyd3o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_64wka"]
 radius = 5.5
@@ -100,6 +101,9 @@ unique_name_in_owner = true
 statsComponent = NodePath("../StatsComponent")
 
 [node name="StatsComponent" parent="." unique_id=1824712528 instance=ExtResource("6_vw112")]
+unique_name_in_owner = true
+
+[node name="DamageNumberComponent" parent="." unique_id=1751391817 instance=ExtResource("7_lyd3o")]
 unique_name_in_owner = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=502590655]

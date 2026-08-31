@@ -5,12 +5,13 @@ class_name Enemy
 @onready var pivot:Node2D = %FlipPivot
 @onready var animationPlayer:AnimationPlayer = %AnimationPlayer
 @onready var statsComponent:StatsComponent = %StatsComponent
+@onready var damageNumberComponent:DamageNumberComponent = %DamageNumberComponent
 
 @export var attackDelay:float = 3.0
 var attackDeltaAccumulator:float = 0.0
 
 var isAttacking:bool = false
-
+var isDead:bool = false
 
 func _ready() -> void:
 	# set up signals
@@ -22,7 +23,6 @@ func _physics_process(delta: float) -> void:
 	move(delta)
 	
 	# handle attacks
-	
 	if attackDeltaAccumulator > attackDelay:
 		attack()
 		attackDeltaAccumulator = 0.0
@@ -45,15 +45,30 @@ func move(delta: float) -> void:
 	move_and_slide()
 
 func attack() -> void:
-	isAttacking = true
-	animationPlayer.play("attack")
-	print("attacking")
-	await animationPlayer.animation_finished
-	isAttacking = false
+	if not isAttacking and not isDead:
+		isAttacking = true
+		play_animation("attack")
+		isAttacking = false
 
-func _on_health_changed(currentHP:int, maxHP:int) -> void:
+func play_animation(animationName:String) -> void:
+	# wait for specifically the given animation to finish
+	animationPlayer.play(animationName)
+	var tempName:String = ""
+	while tempName != animationName:
+		tempName = await animationPlayer.animation_finished
+
+func _on_health_changed(damageTaken:int, currentHP:int, maxHP:int) -> void:
 	print("Enemy health: ", currentHP, "/", maxHP)
+	if not isDead:
+		damageNumberComponent.make_damage_number(damageTaken)
 
 func _on_health_depleted() -> void:
 	print("Enemy died")
+	isDead = true
+	pivot.visible = false
+	
+	# wait for damage labels
+	damageNumberComponent.exitingTree = true
+	damageNumberComponent.check_labels()
+	await damageNumberComponent.labelsFinished
 	queue_free()

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://byav0ij4p71od" path="res://components/attack_component.tscn" id="4_e1ltt"]
 [ext_resource type="PackedScene" uid="uid://cumpm7m5x4vxn" path="res://components/movement_component_2d.tscn" id="5_dxifv"]
 [ext_resource type="PackedScene" uid="uid://cm3wc0jf2ol2w" path="res://components/stats_component.tscn" id="6_pwjut"]
+[ext_resource type="Resource" uid="uid://b3627axd0jlkh" path="res://resources/enemy_stats.tres" id="7_hb8ge"]
 [ext_resource type="PackedScene" uid="uid://cpwi3jbodapky" path="res://components/damage_number_component.tscn" id="7_wujgv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7f3qt"]
@@ -103,6 +104,7 @@ statsComponent = NodePath("../StatsComponent")
 
 [node name="StatsComponent" parent="." unique_id=1824712528 instance=ExtResource("6_pwjut")]
 unique_name_in_owner = true
+statsData = ExtResource("7_hb8ge")
 
 [node name="DamageNumberComponent" parent="." unique_id=1751391817 instance=ExtResource("7_wujgv")]
 unique_name_in_owner = true

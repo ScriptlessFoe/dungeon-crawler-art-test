@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://2efacwwrjoj5"]
+
+[ext_resource type="Texture2D" uid="uid://c3ip18738lmdp" path="res://PH Coin-1.png.png" id="1_aavw0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1bvp3"]
+rough = true
+bounce = 0.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ka23v"]
+radius = 5.676468
+
+[node name="Ball" type="RigidBody2D" unique_id=1967953806]
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+gravity_scale = 0.0
+linear_damp_mode = 1
+linear_damp = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=726247043]
+shape = SubResource("CircleShape2D_ka23v")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=971612536]
+self_modulate = Color(1, 0.101960786, 1, 1)
+texture_filter = 1
+position = Vector2(-0.33333334, 1.3333334)
+texture = ExtResource("1_aavw0")

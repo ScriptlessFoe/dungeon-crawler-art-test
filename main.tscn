@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bcr20ha6slypg" path="res://player_controller.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b6aojv5m7cjsn" path="res://enemy.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dj6ci6ejhe12y" path="res://ball.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://2efacwwrjoj5" path="res://ball red.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node2D" unique_id=1514945978]
 
@@ -53,3 +54,15 @@ position = Vector2(167, 273)
 
 [node name="Ball12" parent="." unique_id=1609035183 instance=ExtResource("4_1bvp3")]
 position = Vector2(197, 253)
+
+[node name="PlayerController2" parent="." unique_id=858827879 instance=ExtResource("2_0xm2m")]
+position = Vector2(130, 229)
+
+[node name="Ball13" parent="." unique_id=979343784 instance=ExtResource("5_lquwl")]
+position = Vector2(240, 308)
+
+[node name="Ball14" parent="." unique_id=446237097 instance=ExtResource("5_lquwl")]
+position = Vector2(198, 333)
+
+[node name="Ball15" parent="." unique_id=1057319273 instance=ExtResource("5_lquwl")]
+position = Vector2(236, 331)
